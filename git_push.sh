@@ -23,6 +23,6 @@ if [ -z "$commit" ]; then
     echo "Debe ingresar el commit..."
 else
     git add *
-    git commit -m "$commit [ $date ]"
+    git commit -m "$commit [ "$date" ]"
     git push -u origin "$branch"
 fi
