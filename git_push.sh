@@ -4,6 +4,10 @@
 clear
 fecha=`date +%d-%m-%Y`
 echo "==============================================================="
+echo "Cantidad de commits realizados y sus descripciones"
+echo "==============================================================="
+git shortlog
+echo "==============================================================="
 echo "Push modificaciones"
 echo "Por favor ingrese el commit para este push"
 echo "==============================================================="
