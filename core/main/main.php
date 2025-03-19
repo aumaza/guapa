@@ -63,37 +63,61 @@
 
 <?php mainNavBar($nombre,$avatar); ?>
 
-  
-<div class="container">
- 
-  <?php
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-2 sidenav"><br>
+            <div class="panel panel-default">
+                <div class="panel-heading"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Menú</div>
+                    <form action="#" method="POST">
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <li class="list-group-item">
+                                    <button type="submit" class="btn btn-default btn-block">Default</button>
+                                </li>
+                                <li class="list-group-item">
+                                    <button type="submit" class="btn btn-default btn-block">Default</button>
+                                </li>
+                                <li class="list-group-item">
+                                    <button type="submit" class="btn btn-default btn-block">Default</button>
+                                </li>
+                                <li class="list-group-item">
+                                    <button type="submit" class="btn btn-default btn-block">Default</button>
+                                </li>
+                            </div>
+                        </div>
+                    </form>
 
-    if($conn){
-       
-        // MODALES
-        modalAbout();
-        modalDocumentation();
+            </div>
+        </div>
 
-        // SALIR DEL SISTEMA
-        if(isset($_POST['exit'])){
-          logOut($nombre);
-        }
+<div class="col-sm-10">
 
-        // HOME
-        if(isset($_POST['home'])){
-          home();
-        }
+<?php
 
+if($conn){
+// MODALES
+    modalAbout();
+    modalDocumentation();
 
-    }else{
-      flyerConnFailure();
+// SALIR DEL SISTEMA
+    if(isset($_POST['exit'])){
+       logOut($nombre);
+    }
+// HOME
+    if(isset($_POST['dashboard'])){
+       dashboard($conn,$dbname);
     }
 
 
-  ?>
+}else{
+  flyerConnFailure();
+}
 
-
+?>
 </div>
+</div>
+</div>
+
 
 
 

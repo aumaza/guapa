@@ -7,7 +7,7 @@ function mainNavBar($nombre,$avatar){
 			  <div class="container-fluid">
 			    <div class="navbar-header">
 			    <form action="#" method="POST">
-			      <button class="btn btn-default btn-sm navbar-btn" type="submit" name="home"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Parque Informático</button>
+			      <button class="btn btn-warning btn-sm navbar-btn" type="submit" name="dashboard"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Dashboard</button>
 			    </form>
 			    </div>
 
@@ -23,26 +23,30 @@ function mainNavBar($nombre,$avatar){
 			    <ul class="nav navbar-nav navbar-right">
 			      
 			      <div class="dropdown">
-				    <button class="btn btn-primary dropdown-toggle navbar-btn" type="button" data-toggle="dropdown" data-toggle="tooltip" title="Menú"><img src="'.$avatar.'" alt="Avatar" class="avatar" /> '.$nombre.'</button>
-				    <ul class="dropdown-menu">
+				    <button class="btn btn-primary dropdown-toggle navbar-btn" type="button" data-toggle="dropdown" data-toggle="tooltip" title="Menú">';
+                        if(($avatar == '..') && ($nombre == 'Administrador')){
+                            echo '<img src="../img/meeting-chair.png" alt="Avatar" class="avatar" /> '.$nombre.'</button>';
+                        }else if(($avatar == '..') && ($nombre != 'Administrador')){
+                            echo '<img src="../img/view-media-artist.png" alt="Avatar" class="avatar" /> '.$nombre.'</button>';
+                        }else if($avatar != '..'){
+                            echo '<img src="'.$avatar.'" alt="Avatar" class="avatar" /> '.$nombre.'</button>';
+                        }
+            echo '<ul class="dropdown-menu">
 				    <form action="#" method="POST">
 				      <li class="dropdown-header">Menú del Usuario</li>
 				      <li><button type="submit" name="user_bio" class="btn btn-default btn-sm btn-block">
-				      	<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Mis Datos</button></li>
+				      	<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Mis Datos</button></li>';
+
+                        if($nombre == "Administrador"){
+
+                            echo '<li class="divider"></li>
+                                    <li class="dropdown-header">Menú del sistema</li>
+                                        <li><button type="submit" name="users" class="btn btn-default btn-sm btn-block">
+                                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuarios</button></li>';
+                        }
 				      
-				      <li><button type="submit" name="devices" class="btn btn-default btn-sm btn-block">
-				      	<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Equipos</button></li>
-				      
-				      <li><button type="submit" name="map" class="btn btn-default btn-sm btn-block">
-				      	<span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Mapa Equipos</button></li>
-				      
-				      <li class="divider"></li>
-				      <li class="dropdown-header">Menú del sistema</li>
-				      <li><button type="submit" name="users" class="btn btn-default btn-sm btn-block">
-				      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuarios</button></li>
-				      
-				      <li><button class="btn btn-danger btn-sm btn-block" type="submit" name="exit">
-				      	<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir</button></li>
+				      echo '<li><button class="btn btn-danger btn-sm btn-block" type="submit" name="exit">
+                                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir</button></li>
 				     </form>
 				    </ul>
 				  </div>
@@ -103,6 +107,86 @@ function modalDocumentation(){
 		    </div>
 		  </div>';
 
+}
+
+
+function dashboard($conn,$dbname){
+
+    echo '<div class="container-fluid">
+            <div class="col-sm-12">
+            <div class="jumbotron">
+
+                <div class="well">
+                    <h4>Dashboard</h4>
+                    <p>Some text..</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                    <div class="well">
+                        <h4>Users</h4>
+                        <p>1 Million</p>
+                    </div>
+                    </div>
+                    <div class="col-sm-3">
+                    <div class="well">
+                        <h4>Pages</h4>
+                        <p>100 Million</p>
+                    </div>
+                    </div>
+                    <div class="col-sm-3">
+                    <div class="well">
+                        <h4>Sessions</h4>
+                        <p>10 Million</p>
+                    </div>
+                    </div>
+                    <div class="col-sm-3">
+                    <div class="well">
+                        <h4>Bounce</h4>
+                        <p>30%</p>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                    <div class="well">
+                        <p>Text</p>
+                        <p>Text</p>
+                        <p>Text</p>
+                    </div>
+                    </div>
+                    <div class="col-sm-4">
+                    <div class="well">
+                        <p>Text</p>
+                        <p>Text</p>
+                        <p>Text</p>
+                    </div>
+                    </div>
+                    <div class="col-sm-4">
+                    <div class="well">
+                        <p>Text</p>
+                        <p>Text</p>
+                        <p>Text</p>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-8">
+                    <div class="well">
+                        <p>Text</p>
+                    </div>
+                    </div>
+                    <div class="col-sm-4">
+                    <div class="well">
+                        <p>Text</p>
+                    </div>
+                    </div>
+                </div>
+
+                </div>
+                </div>';
 }
 
 

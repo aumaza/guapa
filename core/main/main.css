@@ -37,6 +37,41 @@ border-radius: 6px;
 }
 
 body{
-	height:1500px;
+	height: auto;
 	background: #839192;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+.row.content {height: auto;}
+
+/* Set gray background color and 100% height */
+.sidenav {
+background-color: #f1f1f1;
+border-right: 6px solid green;
+height: 100%;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: auto;) {
+.sidenav {
+height: auto;
+padding: 10px;
+}
+.row.content {height: auto;}
+}
+
+/* Para móviles */
+@media (max-width: 767px) {
+    body {
+        background-color: #839192;
+        font-family: ubuntu;
+    }
+}
+
+/* Para PC */
+@media (min-width: 768px) {
+    body {
+        background-color: #839192;
+        font-family: ubuntu;
+    }
 }
