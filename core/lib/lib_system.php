@@ -62,10 +62,10 @@ function skeleton(){
 
 function formLogIn(){
 
-		echo '<div class="container">
+		echo '<div class="container-fluid">
 					<div class="jumbotron">
-					<h1><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Parque Informático</h1>
-					<p>Ingrese sus datos</p><hr>
+
+					<hr>
   
 				   <form id="fr_login_ajax" method="POST">
 				    <div class="form-group">
@@ -101,7 +101,7 @@ function logIn($user,$pass,$conn,$db_basename){
 	$_SESSION['user'] = $user;
 	$_SESSION['pass'] = $pass;
 	
-	$sql_1 = "select password from pi_usuarios where user = '$user'";
+	$sql_1 = "select password from g_usuarios where user = '$user'";
 	$query_1 = mysqli_query($conn,$sql_1);
 	while($row = mysqli_fetch_array($query_1)){
         $hash = $row['password'];
@@ -109,10 +109,10 @@ function logIn($user,$pass,$conn,$db_basename){
 	
     
     
-	$sql = "SELECT * FROM pi_usuarios where user = '$user' and role = 1";
+	$sql = "SELECT * FROM g_usuarios where user = '$user' and role = 1";
 	$q = mysqli_query($conn,$sql);
 	
-	$query = "SELECT * FROM pi_usuarios where user = '$user' and role = 0";
+	$query = "SELECT * FROM g_usuarios where user = '$user' and role = 0";
 	$retval = mysqli_query($conn,$query);
 	
 	
@@ -175,15 +175,41 @@ function home(){
 	echo '<div class="container"> 
     			<div class="jumbotron">
     			<footer class="container-fluid text-center">
-					  <span class="glyphicon glyphicon-th" aria-hidden="true"></span> Parque Informático
+					  <span class="glyphicon glyphicon-th" aria-hidden="true"></span> GUAPA [ Admininstración de Propiedades en Alquiler ]
 					</footer><hr>
-                	<p align=center><img src="../img/devices.png"  class="img-reponsive img-rounded" style="width:70%"></p><hr>
+                	<p align=center><img src="img/img_01.jpg"  class="img-reponsive img-rounded" style="width:70%"></p><hr>
                 	
                 	<footer class="container-fluid text-center">
 					  Develop by <a href="mailto:develslack@gmail.com">Slackzone Development</a>
 					</footer>
           		</div>
             </div>';
+}
+
+function modalLogIn(){
+
+    echo '<div class="modal fade" id="myModal_login" role="dialog">
+            <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Ingresar</h3>
+                </div>
+                <div class="modal-body">';
+
+                formLogIn();
+
+            echo '</div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Cerrar</button>
+                </div>
+            </div>
+
+            </div>
+        </div>';
 }
 
 

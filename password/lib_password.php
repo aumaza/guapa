@@ -107,7 +107,7 @@ public function validatePassword($password_1,$password_2){
 public function resetPassword($onePassword,$user,$password_1,$password_2,$conn,$dbname){
 
 	mysqli_select_db($conn,$dbname);
-	$sql = "select user from pi_usuarios where user = $onePassword->getUser('$user')";
+	$sql = "select user from g_usuarios where user = $onePassword->getUser('$user')";
 	$query = mysqli_query($conn,$sql);
 	$rows = mysqli_num_rows($query);
 
@@ -119,7 +119,7 @@ public function resetPassword($onePassword,$user,$password_1,$password_2,$conn,$
 
 			$passHash = password_hash($password_1, PASSWORD_BCRYPT);
 
-			$sql_1 = "update pi_usuarios set password = $onePassword->setPassword('$passHash') where user = $onePassword->getUser('$user')";
+			$sql_1 = "update g_usuarios set password = $onePassword->setPassword('$passHash') where user = $onePassword->getUser('$user')";
 			$query_1 = mysqli_query($conn,$sql_1);
 
 			if($query_1){

@@ -11,10 +11,39 @@ role int(1) default 1 not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+#tabla g_inquilinos
+create table if not exists g_inquilinos(
+id int(11) auto_increment primary key,
+nombre varchar(100) not null,
+dni varchar(10) not null,
+num_pasaporte varchar(50),
+nacionalidad varchar(100) not null,
+email varchar(65) not null,
+celular varchar(16) not null,
+cbu varchar(24) not null,
+alias varchar(50),
+image varchar(200)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+#tabla g_propietarios
+create table if not exists g_propietarios(
+id int(11) auto_increment primary key,
+nombre varchar(100) not null,
+dni varchar(10) not null,
+nacionalidad varchar(50) not null,
+direccion varchar(100) not null,
+celular varchar(16) not null,
+email varchar(65) not null,
+cbu varchar(24) not null,
+alias varchar(50),
+image varchar(200)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # QUERIES
 select * from g_usuarios;
 show tables;
 show columns from g_usuarios;
+show columns from g_inquilinos;
+show columns from g_propietarios;
+source /mnt/sda2/htdocs/direccion-produccion/guapa/sqls/dumps/guapa-18-03-2025.sql;
 

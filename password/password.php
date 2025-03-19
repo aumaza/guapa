@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Parque Informático - Cambio de Password</title>
+  <title>GUAPA - Cambio de Password</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php skeleton(); ?>
@@ -23,10 +23,10 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="../#"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Parque Informático</a>
+      <a class="navbar-brand" href="../#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="../regestry/regestry.php"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Registrarse</a></li>
+      <li><a href="../regestry/regestry.php"><span class="glyphicon glyphicon-flash" aria-hidden="true"></span> Registrarse</a></li>
     </ul>
     <?php
     	if($conn){

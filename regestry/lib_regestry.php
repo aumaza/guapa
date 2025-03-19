@@ -85,7 +85,12 @@ class Regestry{
 */
 
 
-public function formRegestry(){
+public function formRegestry($conn,$dbname){
+
+        mysqli_select_db($conn,$dbname);
+        $sql = "select * from g_usuarios where id = 1";
+        $query = mysqli_query($conn,$sql);
+        $rows = mysqli_num_rows($query);
 
 		echo '<div class="container">
 					<div class="jumbotron">
@@ -106,11 +111,12 @@ public function formRegestry(){
 
 
 				     <div class="form-group">
-					  <label for="tasks">Tareas / Funciones:</label>
+					  <label for="tasks">Tipo de Usuario:</label>
 					  <select class="form-control" id="tasks" name="tasks">
 					    <option value="" selected disabled>Seleccionar</option>
-					    <option value="1">Sys Admin</option>
-					    <option value="2">Usuario</option>
+					    <option value="1" '.(($rows >= 0) ? "enabled" : "disabled").'>Sys Admin</option>
+					    <option value="2">Locador</option>
+					    <option value="3">Locatario</option>
 					  </select>
 					</div>
 
@@ -166,7 +172,7 @@ public function addRegestry($oneRegestry,$name,$email,$password_1,$password_2,$f
 			if((strcmp($password_2,$password_1) == 0)){
 
 				mysqli_select_db($conn,$dbname);
-                $sql = "select * from pi_usuarios where email = '$email' or nombre = '$name'";
+                $sql = "select * from g_usuarios where email = '$email' or name = '$name'";
                 $query = mysqli_query($conn,$sql);
                 $rows = mysqli_num_rows($query);
 
@@ -192,12 +198,12 @@ public function addRegestry($oneRegestry,$name,$email,$password_1,$password_2,$f
 									        if(move_uploaded_file($_FILES["my_file"]["tmp_name"], $targetFilePath)){
 									        
 									        
-									        $sql_1 = "INSERT INTO pi_usuarios ".
-									                "(nombre,
+									        $sql_1 = "INSERT INTO g_usuarios ".
+									                "(name,
 									                  user,
 									                  password,
 									                  email,
-									                  functions,
+									                  task,
 									                  avatar,
 									                  role)".
 									                "VALUES ".
@@ -237,12 +243,12 @@ public function addRegestry($oneRegestry,$name,$email,$password_1,$password_2,$f
 
 		                    	}if($file == ''){
 
-		                    		$sql_2 = "INSERT INTO pi_usuarios ".
-									                "(nombre,
+		                    		$sql_2 = "INSERT INTO g_usuarios ".
+									                "(name,
 									                  user,
 									                  password,
 									                  email,
-									                  functions,
+									                  task,
 									                  role)".
 									                "VALUES ".
 									                  "($oneRegestry->setName('$name'),
