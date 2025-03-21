@@ -77,6 +77,7 @@ comprobante_pago varchar(200)
 
 # QUERIES
 select * from g_usuarios;
+select * from g_empresas;
 show tables;
 show columns from g_usuarios;
 show columns from g_inquilinos;

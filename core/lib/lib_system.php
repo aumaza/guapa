@@ -36,7 +36,7 @@ function skeleton(){
 		
 		<script src="/guapa/skeleton/js/dataTables.editor.min.js"></script>
 		<script src="/guapa/skeleton/js/dataTables.select.min.js"></script>
-		<script src="/guapa-informatico/skeleton/js/dataTables.buttons.min.js"></script>
+		<script src="/guapa/skeleton/js/dataTables.buttons.min.js"></script>
 		<script src="/guapa/skeleton/dataTables/DataTables/js/buttons.colVis.min.js"></script>
 		
 		<script src="/guapa/skeleton/js/jszip.min.js"></script>

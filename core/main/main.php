@@ -9,18 +9,20 @@
       include "../lib/lib_system.php";
       include "lib_main.php";
       include "../lib/usuarios/lib_usuarios.php";
+      include "../lib/empresas/lib_empresas.php";
 
 
       $varsession = $_SESSION['user'];
       
       if($conn){
 
-        $sql = "select id, name, avatar from g_usuarios where user = '$varsession'";
+        $sql = "select id, name, avatar, task from g_usuarios where user = '$varsession'";
         mysqli_select_db($conn,$db_basename);
         $query = mysqli_query($conn,$sql);
         while($row = mysqli_fetch_array($query)){
           $nombre = $row['name'];
           $user_id = $row['id'];
+          $task = $row['task'];
           $avatar = '..'.substr($row['avatar'], 7);
                   
         }
@@ -72,6 +74,14 @@
                     <form action="#" method="POST">
                         <div class="panel-body">
                             <div class="list-group">
+                                <?php
+                                    if($task == 1){
+                                        echo '<li class="list-group-item">
+                                                <button type="submit" class="btn btn-default btn-block" name="empresas">
+                                                    <span class="glyphicon glyphicon-oil" aria-hidden="true"></span> Empresas</button>
+                                              </li>';
+                                    }
+                                ?>
                                 <li class="list-group-item">
                                     <button type="submit" class="btn btn-default btn-block">Default</button>
                                 </li>
@@ -119,6 +129,13 @@ if($conn){
         $nUsuario->userBio($nUsuario,$user_id,$conn,$dbname);
     }
 
+// EMPRESAS
+    // se crea el objeto
+    $nEmpresa = new Empresas();
+    if(isset($_POST['empresas'])){
+        $nEmpresa->listEmpresas($nEmpresa,$conn,$dbname);
+    }
+
 }else{
   flyerConnFailure();
 }
@@ -130,6 +147,7 @@ if($conn){
 
 
 <script type="text/javascript" src="../lib/usuarios/lib_usuarios.js"></script>
+<script type="text/javascript" src="../lib/empresas/lib_empresas.js"></script>
 
 </body>
 </html>

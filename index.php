@@ -28,7 +28,6 @@
     <ul class="nav navbar-nav">
       <li><a href="regestry/regestry.php"><span class="glyphicon glyphicon-flash" aria-hidden="true"></span> Registrarse</a></li>
       <li><a href="password/password.php"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> Olvidé mi Password</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> A cerca de...</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         <button type="button" class="btn btn-success btn-sm navbar-btn" data-toggle="modal" data-target="#myModal_login">
