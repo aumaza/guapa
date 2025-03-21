@@ -39,6 +39,42 @@ alias varchar(50),
 image varchar(200)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+#tabla g_propiedades
+create table if not exists g_propiedades(
+id int(11) auto_increment primary key,
+id_propietario int(11) not null,
+localidad varchar(50) not null,
+barrio varchar(50) not null,
+direccion varchar(50) not null,
+piso int(11) not null,
+dpto varchar(10) not null,
+cant_ambientes int(11) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#tabla g_empresas
+create table if not exists g_empresas(
+id int(11) auto_increment primary key,
+descripcion varchar(50) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#tabla g_servicios
+create table if not exists g_servicios(
+id int(11) auto_increment primary key,
+descripcion varchar(50) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#tabla g_pagos_servicios
+create table if not exists g_pago_servicios(
+id int(11) auto_increment primary key,
+id_propiedad int(11) not null,
+id_servicio int(11) not null,
+id_empresa int(11) not null,
+fecha_vencimiento date not null,
+fecha_pago date not null,
+importe float(10,2) not null,
+comprobante_pago varchar(200)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 # QUERIES
 select * from g_usuarios;
 show tables;

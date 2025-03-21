@@ -8,6 +8,7 @@
       include "../../connection/connection.php";
       include "../lib/lib_system.php";
       include "lib_main.php";
+      include "../lib/usuarios/lib_usuarios.php";
 
 
       $varsession = $_SESSION['user'];
@@ -107,7 +108,16 @@ if($conn){
     if(isset($_POST['dashboard'])){
        dashboard($conn,$dbname);
     }
+// USUARIOS
+    // se crea el objeto
+    $nUsuario = new Usuarios();
+    if(isset($_POST['users'])){
+        $nUsuario->listUsuarios($nUsuario,$conn,$dbname);
+    }
 
+    if(isset($_POST['user_bio'])){
+        $nUsuario->userBio($nUsuario,$user_id,$conn,$dbname);
+    }
 
 }else{
   flyerConnFailure();
@@ -119,7 +129,7 @@ if($conn){
 </div>
 
 
-
+<script type="text/javascript" src="../lib/usuarios/lib_usuarios.js"></script>
 
 </body>
 </html>
