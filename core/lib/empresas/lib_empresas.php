@@ -108,6 +108,35 @@ class Empresas{
     }
 
 
+    public function formEditEmpresa($nEmpresa,$id,$conn,$dbname){
+
+        mysqli_select_db($conn,$dbname);
+        $sql = "select * from g_empresas where id = '$id'";
+        $query = mysqli_query($conn,$sql);
+        $row = mysqli_fetch_assoc($query);
+
+        echo '<div class="container">
+                <div class="jumbotron">
+                <div class="alert alert-info">
+                <h2><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar Empresa</h2>
+                </div><hr>
+                <form id="fr_edit_empresa_ajax" method="POST">
+                    <input type="hidden" id="id" name="id" value="'.$id.'">
+                    <div class="form-group">
+                    <label for="descripcion">Empresa:</label>
+                    <input type="text" class="form-control" id="descripcion" placeholder="Ingrese la razón social de la empresa" name="descripcion" value="'.$nEmpresa->getDescripcion($row['descripcion']).'">
+                    </div>
+
+                    <button type="submit" class="btn btn-success" id="edit_empresa">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Actualizar</button>
+                </form><hr>
+
+                <div id="messageEditEmpresa"></div>
+
+                </div>
+                </div>';
+    }
+
     // ====================================================================================================================================== //
     // PERSISTENCIA
     // ====================================================================================================================================== //
@@ -141,12 +170,28 @@ class Empresas{
             echo 9; // registro existente
         }
 
+    } // END OF FUNCTION
 
+    public function updateEmpresa($nEmpresa,$id,$descripcion,$conn,$dbname){
+
+        mysqli_select_db($conn,$dbname);
+        $sql = "update g_empresas set descripcion = $nEmpresa->setDescripcion('$descripcion') where id = '$id'";
+        $query = mysqli_query($conn,$sql);
+
+        if($query){
+            $success = 'Actualización exitosa de registro con ID: [ ' .$id. ' ] en tabla g_empresas';
+            $nEmpresa->updateSuccessMysqlEmpresa($success);
+            echo 1;
+        }else{
+            $error = 'Hubo un problema al actualizar registro con ID: [ '.$id.' ] en la tabla g_empresas. Error: [ '.mysqli_error($conn).' ]';
+            $nEmpresa->errorMysqlEmpresa($error);
+            echo -1; // hubo un problema al guardar el registro
+        }
 
     }
 
 
-    // MENEJO DE  ACTUALIZACION EXITOSA
+    // MENEJO DE GUARDADO EXITOSA
 
     public function successMysqlEmpresa($success){
 
@@ -159,15 +204,38 @@ class Empresas{
         $file = fopen($fileName, 'a');
         fwrite($file, "\n".$message);
         fclose($file);
-        chmod($file, 0777);
+        //chmod($file, 0777);
 
         }else{
             $file = fopen($fileName, 'w');
             fwrite($file, $message);
             fclose($file);
-            chmod($file, 0777);
+            //chmod($file, 0777);
             }
-    }
+    } // END OF FUNCTION
+
+    // MENEJO DE ACTUALIZACION EXITOSA
+
+    public function updateSuccessMysqlEmpresa($success){
+
+        $fileName = "empresa_mysql_success.log";
+        $date = date("d-m-Y H:i:s");
+        $message = 'Success: '.$success.' - '.$date;
+
+        if (file_exists($fileName)){
+
+        $file = fopen($fileName, 'a');
+        fwrite($file, "\n".$message);
+        fclose($file);
+        //chmod($file, 0777);
+
+        }else{
+            $file = fopen($fileName, 'w');
+            fwrite($file, $message);
+            fclose($file);
+            //chmod($file, 0777);
+            }
+    } // END OF FUNCTION
 
     // MANEJO DE ERRORES
 
@@ -182,13 +250,13 @@ class Empresas{
         $file = fopen($fileName, 'a');
         fwrite($file, "\n".$message);
         fclose($file);
-        chmod($file, 0777);
+        //chmod($file, 0777);
 
         }else{
             $file = fopen($fileName, 'w');
             fwrite($file, $message);
             fclose($file);
-            chmod($file, 0777);
+            //chmod($file, 0777);
             }
     } // END OF FUNCTION
 

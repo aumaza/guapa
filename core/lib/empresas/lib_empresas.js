@@ -139,15 +139,76 @@ $(document).ready(function(){
 });
 
 
+// CTUALIZAR EMPRESA
+$(document).ready(function(){
+    $('#edit_empresa').click(function(){
+
+        const form = document.querySelector('#fr_edit_empresa_ajax');
+
+        const id = document.querySelector('#id');
+        const descripcion = document.querySelector('#descripcion');
+
+        const formData = new FormData(form);
+        const values = [...formData.entries()];
+        console.log(values);
+
+        formData.append('id', id.value);
+        formData.append('description', descripcion.value);
+
+         jQuery.ajax({
+            type:"POST",
+            method:"POST",
+            url:"update_empresa.php",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success:function(r){
+                if(r == 1){
+                    var mensaje = '<br><div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Registro Actualizado Exitosamente</p></div>';
+                     document.getElementById('messageEditEmpresa').innerHTML = mensaje;
+                     console.log(values);
+                     setTimeout(function() { window.opener.location.reload(); }, 2000);
+                     setTimeout(function() { $(".close").click(); }, 3000);
+
+                     }else if(r == -1){
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> Ocurrió un problema al intentar actualizar el registro</p></div>';
+                        document.getElementById('messageEditEmpresa').innerHTML = mensaje;
+                        console.log(formData);
+                        setTimeout(function() { $(".close").click(); }, 4000);
+                    }else if(r == 5){
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Debe ingresar un nombre o Razón Social</p></div>';
+                        document.getElementById('messageEditEmpresa').innerHTML = mensaje;
+                        console.log(formData);
+                        setTimeout(function() { $(".close").click(); }, 4000);
+                    }else if(r == 7){
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Sin conexion a la base de datos</p></div>';
+                        document.getElementById('messageEditEmpresa').innerHTML = mensaje;
+                        console.log(formData);
+                        setTimeout(function() { $(".close").click(); }, 4000);
+                    }
+
+                    else if(r == ''){
+                        //console.log(formData);
+                    }
+            },
+
+        });
+
+        return false;
+    });
+});
+
 
 // CALLERS
  function callEditEmpresa(id){
-    var ancho = 600;
-    var alto = 500;
+    console.log(id);
+    var ancho = 550;
+    var alto = 450;
     var left = (screen.width / 2) - (ancho / 2);
     var top = (screen.height / 2) - (alto / 2);
     let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
-    open("../lib/empresas/form_editar_empresa.php?id="+id+"", "edit_empresa", params);
+    open("../lib/empresas/form_edit_empresa.php?id="+id+"", "edit_empresa", params);
 
 }
 
