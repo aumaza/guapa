@@ -1,5 +1,6 @@
 #!/bin/bash
 
+./dump_data_base.sh
 
 clear
 fecha=`date +%d-%m-%Y`

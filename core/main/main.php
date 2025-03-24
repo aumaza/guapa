@@ -10,6 +10,7 @@
       include "lib_main.php";
       include "../lib/usuarios/lib_usuarios.php";
       include "../lib/empresas/lib_empresas.php";
+      include "../lib/servicios/lib_servicios.php";
 
 
       $varsession = $_SESSION['user'];
@@ -79,6 +80,10 @@
                                         echo '<li class="list-group-item">
                                                 <button type="submit" class="btn btn-default btn-block" name="empresas">
                                                     <span class="glyphicon glyphicon-oil" aria-hidden="true"></span> Empresas</button>
+                                              </li>
+                                              <li class="list-group-item">
+                                                <button type="submit" class="btn btn-default btn-block" name="servicios">
+                                                    <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> Servicios</button>
                                               </li>';
                                     }
                                 ?>
@@ -136,6 +141,13 @@ if($conn){
         $nEmpresa->listEmpresas($nEmpresa,$conn,$dbname);
     }
 
+// SERVICIOS
+    // se crea el objeto
+    $nServicio = new Servicios();
+    if(isset($_POST['servicios'])){
+        $nServicio->listServicios($nServicio,$conn,$dbname);
+    }
+
 }else{
   flyerConnFailure();
 }
@@ -148,6 +160,7 @@ if($conn){
 
 <script type="text/javascript" src="../lib/usuarios/lib_usuarios.js"></script>
 <script type="text/javascript" src="../lib/empresas/lib_empresas.js"></script>
+<script type="text/javascript" src="../lib/servicios/lib_servicios.js"></script>
 
 </body>
 </html>

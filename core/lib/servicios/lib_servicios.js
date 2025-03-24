@@ -1,6 +1,6 @@
 // ESTRUCTURA TABLE
  $(document).ready(function(){
-      $('#empresasTable').DataTable({
+      $('#serviciosTable').DataTable({
         "order": [[0, "asc"]],
         "responsive":     true,
         "scrollY":        "300px",
@@ -13,19 +13,19 @@
             {
                 extend: 'excel',
                 text: 'Export Excel',
-                messageTop: 'Listado de Empresas',
+                messageTop: 'Listado de Servicios',
                 exportOptions: { columns: ':visible',}
             },
             {
                 extend: 'csv',
                 text: 'Export CSV',
-                messageTop: 'Listado de Empresas',
+                messageTop: 'Listado de Servicios',
                 exportOptions: { columns: ':visible',}
             },
             {
                 extend: 'pdf',
                 text: 'Export PDF',
-                messageTop: 'Listado de Empresas',
+                messageTop: 'Listado de Servicios',
                 exportOptions: { columns: ':visible',}
             },
             {
@@ -40,7 +40,7 @@
                         .addClass( 'compact' )
                         .css( 'font-size', 'inherit' );
                 },
-                messageTop: 'Listado de Empresas',
+                messageTop: 'Listado de Servicios',
                 autoPrint: false,
                 exportOptions: {
                     columns: ':visible',
@@ -71,12 +71,11 @@
     });
 });
 
-
 // GUARDAR EMPRESA
 $(document).ready(function(){
-    $('#add_empresa').click(function(){
+    $('#add_servicio').click(function(){
 
-        const form = document.querySelector('#fr_new_empresa_ajax');
+        const form = document.querySelector('#fr_new_servicio_ajax');
 
         const descripcion = document.querySelector('#descripcion');
 
@@ -89,7 +88,7 @@ $(document).ready(function(){
          jQuery.ajax({
             type:"POST",
             method:"POST",
-            url:"add_empresa.php",
+            url:"add_servicio.php",
             data: formData,
             cache: false,
             processData: false,
@@ -97,7 +96,7 @@ $(document).ready(function(){
             success:function(r){
                 if(r == 1){
                     var mensaje = '<br><div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Registro Agregado Exitosamente</p></div>';
-                     document.getElementById('messageNewEmpresa').innerHTML = mensaje;
+                     document.getElementById('messageNewServicio').innerHTML = mensaje;
                      console.log(values);
                      $('#descripcion').val('');
                      setTimeout(function() { window.opener.location.reload(); }, 2000);
@@ -105,24 +104,24 @@ $(document).ready(function(){
 
                      }else if(r == -1){
                         var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> Ocurrió un problema al intentar guardar el registro</p></div>';
-                        document.getElementById('messageNewEmpresa').innerHTML = mensaje;
+                        document.getElementById('messageNewServicio').innerHTML = mensaje;
                         console.log(formData);
                         $('#descripcion').val('');
                         setTimeout(function() { $(".close").click(); }, 4000);
                     }else if(r == 9){
                         var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Registro Existente</p></div>';
-                        document.getElementById('messageNewEmpresa').innerHTML = mensaje;
+                        document.getElementById('messageNewServicio').innerHTML = mensaje;
                         console.log(formData);
                         $('#descripcion').val('');
                         setTimeout(function() { $(".close").click(); }, 4000);
                     }else if(r == 5){
-                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Debe ingresar un nombre o Razón Social</p></div>';
-                        document.getElementById('messageNewEmpresa').innerHTML = mensaje;
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Debe ingresar una descripción de servicio</p></div>';
+                        document.getElementById('messageNewServicio').innerHTML = mensaje;
                         console.log(formData);
                         setTimeout(function() { $(".close").click(); }, 4000);
                     }else if(r == 7){
                         var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Sin conexion a la base de datos</p></div>';
-                        document.getElementById('messageNewEmpresa').innerHTML = mensaje;
+                        document.getElementById('messageNewServicio').innerHTML = mensaje;
                         console.log(formData);
                         setTimeout(function() { $(".close").click(); }, 4000);
                     }
@@ -139,11 +138,11 @@ $(document).ready(function(){
 });
 
 
-// CTUALIZAR EMPRESA
+// ACTUALIZAR EMPRESA
 $(document).ready(function(){
-    $('#edit_empresa').click(function(){
+    $('#edit_servicio').click(function(){
 
-        const form = document.querySelector('#fr_edit_empresa_ajax');
+        const form = document.querySelector('#fr_edit_servicio_ajax');
 
         const id = document.querySelector('#id');
         const descripcion = document.querySelector('#descripcion');
@@ -158,7 +157,7 @@ $(document).ready(function(){
          jQuery.ajax({
             type:"POST",
             method:"POST",
-            url:"update_empresa.php",
+            url:"update_servicio.php",
             data: formData,
             cache: false,
             processData: false,
@@ -166,25 +165,27 @@ $(document).ready(function(){
             success:function(r){
                 if(r == 1){
                     var mensaje = '<br><div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Registro Actualizado Exitosamente</p></div>';
-                     document.getElementById('messageEditEmpresa').innerHTML = mensaje;
+                     document.getElementById('messageEditServicio').innerHTML = mensaje;
                      console.log(values);
+                     $('#descripcion').val('');
                      setTimeout(function() { window.opener.location.reload(); }, 2000);
                      setTimeout(function() { $(".close").click(); }, 3000);
                      setTimeout(function() { window.close(); }, 5000);
 
                      }else if(r == -1){
-                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> Ocurrió un problema al intentar actualizar el registro</p></div>';
-                        document.getElementById('messageEditEmpresa').innerHTML = mensaje;
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> Ocurrió un problema al intentar guardar el registro</p></div>';
+                        document.getElementById('messageEditServicio').innerHTML = mensaje;
                         console.log(formData);
+                        $('#descripcion').val('');
                         setTimeout(function() { $(".close").click(); }, 4000);
                     }else if(r == 5){
-                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Debe ingresar un nombre o Razón Social</p></div>';
-                        document.getElementById('messageEditEmpresa').innerHTML = mensaje;
+                        var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Debe ingresar una descripción de servicio</p></div>';
+                        document.getElementById('messageEditServicio').innerHTML = mensaje;
                         console.log(formData);
                         setTimeout(function() { $(".close").click(); }, 4000);
                     }else if(r == 7){
                         var mensaje = '<br><div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><p align=center><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Sin conexion a la base de datos</p></div>';
-                        document.getElementById('messageEditEmpresa').innerHTML = mensaje;
+                        document.getElementById('messageEditServicio').innerHTML = mensaje;
                         console.log(formData);
                         setTimeout(function() { $(".close").click(); }, 4000);
                     }
@@ -202,23 +203,23 @@ $(document).ready(function(){
 
 
 // CALLERS
- function callEditEmpresa(id){
+function callEditServicio(id){
     console.log(id);
     var ancho = 550;
     var alto = 450;
     var left = (screen.width / 2) - (ancho / 2);
     var top = (screen.height / 2) - (alto / 2);
     let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
-    open("../lib/empresas/form_edit_empresa.php?id="+id+"", "edit_empresa", params);
+    open("../lib/servicios/form_edit_servicio.php?id="+id+"", "edit_servicio", params);
 
 }
 
-function callNewEmpresa(){
+function callNewServicio(){
     var ancho = 550;
     var alto = 400;
     var left = (screen.width / 2) - (ancho / 2);
     var top = (screen.height / 2) - (alto / 2);
     let params = `scrollbars=yes,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${ancho},height=${alto},left=${left},top=${top}`;
-    open("../lib/empresas/form_new_empresa.php", "nueva_empresa", params);
+    open("../lib/servicios/form_new_servicio.php", "nuevo_servicio", params);
 
 }
